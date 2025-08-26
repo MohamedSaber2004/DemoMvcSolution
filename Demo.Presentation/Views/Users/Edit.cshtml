@@ -1,0 +1,53 @@
+﻿@using Demo.Presentation.ViewModels.ManagerViewModel.UserManager
+@model UserEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row justify-content-center align-content-center mt-3">
+    <h1 class="col-8 my-4">Edit User</h1>
+    <form method="post" asp-controller="Users" asp-action="Edit" class="row col-8">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group mb-3 col-6">
+            <label asp-for="Fname" class="form-label"></label>
+            <input asp-for="Fname" class="form-control" />
+            <span asp-validation-for="Fname" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3 col-6">
+            <label asp-for="Lname" class="form-label"></label>
+            <input asp-for="Lname" class="form-control" />
+            <span asp-validation-for="Lname" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3 col-6">
+            <label asp-for="PhoneNumber" class="form-label"></label>
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3 col-12">
+            <label class="form-label">Roles</label>
+            <div class="d-flex flex-wrap gap-3">
+                @for (int i = 0; i < Model.Roles.Count; i++)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               asp-for="Roles[@i].IsSelected"
+                               type="checkbox"
+                               id="role_@i" />
+                        <input type="hidden" asp-for="Roles[@i].RoleName" />
+                        <label class="form-check-label" for="role_@i">@Model.Roles[i].RoleName</label>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mt-4 m-auto">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a asp-controller="Users" asp-action="Index" class="btn btn-outline-dark">Back to list</a>
+        </div>
+    </form>
+</div>

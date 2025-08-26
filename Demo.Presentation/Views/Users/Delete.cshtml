@@ -1,0 +1,55 @@
+﻿@using Demo.Presentation.ViewModels.ManagerViewModel.UserManager
+@model UserViewModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="my-5 w-75">User Delete</h1>
+<br />
+
+<ul class="nav nav-tabs" id="userTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active p-4 border" id="general" role="tabpanel" aria-labelledby="general-tab">
+
+        <div class="row">
+            <partial name="UserPartialViews/DetailsDeleteUserPartialView" />
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal-@Model.Id">
+            <i class="fas fa-trash"></i> Delete
+        </button>
+
+        <div class="modal fade" id="DeleteModal-@Model.Id" tabindex="-1" aria-labelledby="deleteModalLabel-@Model.Id" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel-@Model.Id">Delete User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are You Sure You Want to Delete This User?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form asp-action="DeleteConfirm" asp-controller="Users" asp-route-id="@Model.Id" method="post">
+                            @Html.AntiForgeryToken()
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a asp-controller="Users" asp-action="Index" class="btn btn-outline-dark">Back To list</a>
+    </div>
+
+</div>
+
+

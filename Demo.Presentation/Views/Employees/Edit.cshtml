@@ -1,0 +1,40 @@
+﻿@using Demo.BusinessLogic.DTOs.EmployeeDtos
+@using Demo.DataAccess.Models.Employee_Model
+@using Demo.DataAccess.Models.Shared.Enums
+@using Demo.Presentation.ViewModels.EmployeesViewModel
+@model EmployeeViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="row justify-content-center align-content-center mt-3">
+    <h1 class="col-8 my-4">Edit Employee</h1>
+    <form method="post" asp-controller="Employees" asp-action="Edit" class="row col-8" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        @if (!string.IsNullOrEmpty(Model.ImageName)) 
+        { 
+            <div class="form-group mb-3 col-6"> 
+                <label class="form-label">Current Image</label> 
+                <div class="img-fluid"> 
+                    <img src="@Url.Content("~/Files/Images/" + Model.ImageName)" alt="Employee Image" class="img-thumbnail square-image" />
+                </div> 
+            </div> 
+            <br /> 
+        }
+
+        @* File upload for new image *@
+        <div class="form-group mb-3 col-6 align-content-center">
+            <label asp-for="Image" class="form-label">Upload New Image</label>
+            <input asp-for="Image" type="file" class="form-control" value="@Model.ImageName"/>
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+
+        <partial name="EmployeePartialViews/CreateEditEmployeePartialView" />
+
+        <div class="mt-4 m-auto">
+            <input class="btn btn-success" type="submit" value="Save" />
+            <a asp-controller="Employees" asp-action="Index" class="btn btn-outline-dark">Back to list</a>
+        </div>
+    </form>
+</div>
+

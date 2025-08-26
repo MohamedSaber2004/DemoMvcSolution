@@ -1,0 +1,39 @@
+﻿@using Demo.Presentation.ViewModels.ManagerViewModel.UserManager
+@model List<UserManagerViewModel>
+@{
+    ViewData["Title"] = "Pending Users";
+}
+
+<h2>Pending Users</h2>
+<br/>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>UserName</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Registered At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.FullName</td>
+                <td>@user.RegisteredAt.ToLocalTime()</td>
+                <td>
+                    <form asp-action="ApproveUser" asp-controller="Users" asp-route-id="@user.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                    </form>
+                    <form asp-action="RejectUser" asp-controller="Users" asp-route-id="@user.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

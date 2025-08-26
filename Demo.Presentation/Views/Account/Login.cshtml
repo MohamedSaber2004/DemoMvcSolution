@@ -1,0 +1,49 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<div>
+    <br />
+    <br />
+    <h1>Creative SignIn Form</h1>
+</div>
+
+<div class="main-agileinfo">
+    <div class="agileits-top">
+        <!-- Traditional Login Form -->
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="All"></div>
+
+            <input asp-for="Email" placeholder="Email" required />
+            <span asp-validation-for="Email"></span>
+            <br />
+            <input asp-for="Password" placeholder="Password" required />
+            <span asp-validation-for="Password"></span>
+            <br />
+
+            <div class="wthree-text">
+                <label class="anim">
+                    <input asp-for="RememberMe" class="checkbox" />
+                    <span >Keep Me Signed In</span>
+                </label>
+                <div class="clear"> </div>
+            </div>
+
+            <input type="submit" value="SIGNIN" class="btn btn-primary w-100" />
+        </form>
+
+        <!-- Google Login Button -->
+        <form asp-controller="Account" asp-action="GoogleLogin" method="post">
+            <button type="submit" class="btn btn-light bg-secondary w-100 m-auto justify-content-center align-items-center gap-2">
+                <img src="https://developers.google.com/identity/images/g-logo.png" style="width:20px; height:20px; border-radius:50%;" alt="Google logo" />
+                <span class="text-light">Sign in with Google</span>
+            </button>
+        </form>
+
+        <br />
+        <p>Don't have an Account? <a asp-action="Register">Register Now!</a></p>
+        <p><a asp-action="ForgetPassword" asp-controller="Account">Forget Password?</a></p>
+    </div>
+</div>

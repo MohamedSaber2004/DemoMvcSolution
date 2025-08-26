@@ -1,0 +1,19 @@
+﻿@using Demo.Presentation.ViewModels.ManagerViewModel.RoleManager
+@model CreateEditRoleViewModel
+
+@* <div class="form-group mb-3"> *@
+@*     <label class="form-label" asp-for="RoleName"></label> *@
+@*     <input asp-for="RoleName" class="form-control" /> *@
+@*     <span asp-validation-for="RoleName" class="text-danger"></span> *@
+@* </div> *@
+
+<div class="form-group mb-3 col-6">
+    <label class="form-label" asp-for="RoleName"></label>
+    <select asp-for="RoleName" asp-items="Html.GetEnumSelectList<Role>()"
+            class="form-control">
+        <option value="">Select Role Type</option>
+    </select>
+    <span asp-validation-for="RoleName" class="text-danger"></span>
+</div>
+
+
